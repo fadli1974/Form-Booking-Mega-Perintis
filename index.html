@@ -2596,6 +2596,11 @@
                 options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, scales: { x: { beginAtZero: true } } }
             });
         }
+
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            switchMenu('dashboard');
+        });
     </script>
 </body>
 </html>
