@@ -1017,9 +1017,9 @@
                     if (currentContainer) {
                         const id = currentContainer.id;
                         if (id === 'dashboardContainer') applyDashboardFilters();
-                        if (id === 'dataBookingContainer') renderTable();
-                        if (id === 'actualKedatanganContainer') renderTableActual();
-                        if (id === 'updateTroContainer') renderTableTro();
+                        if (id === 'dataBookingContainer') applyFilters();
+                        if (id === 'actualKedatanganContainer') applyFiltersActual();
+                        if (id === 'updateTroContainer') applyFiltersTro();
                         if (id === 'pemalangContainer') renderTablePemalang();
                         if (id === 'bookingFormContainer') checkBookingStatus(); // Re-check if time passed
                     }
@@ -1096,7 +1096,7 @@
         });
 
         // --- 4. Form Submit Logic (Google Sheets) ---
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx9c4gL2mNoNl8YEd5mJNeEJSGjC7SlR7g1p3nea2gs-OLEBuqiJ_f8MBfSO9Yuxas/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwPn0oM8a2R69vT808HFZizNep53hSIA2Jj8wl2pIBcVIcn5DnPJM2x9MexUQ9ux8Rq/exec';
 
         // --- GLOBAL SYSTEM STATUS CHECK ---
         async function checkBookingStatus() {
