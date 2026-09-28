@@ -1540,8 +1540,8 @@
             // Filter by Search (TRO or Perusahaan)
             if (searchVal) {
                 filteredData = filteredData.filter(row => {
-                    return (row.tro && row.tro.toLowerCase().includes(searchVal)) || 
-                           (row.namaPerusahaan && row.namaPerusahaan.toLowerCase().includes(searchVal));
+                    return (row.tro && String(row.tro).toLowerCase().includes(searchVal)) || 
+                           (row.namaPerusahaan && String(row.namaPerusahaan).toLowerCase().includes(searchVal));
                 });
             }
             
