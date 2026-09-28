@@ -1096,7 +1096,7 @@
         });
 
         // --- 4. Form Submit Logic (Google Sheets) ---
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwPn0oM8a2R69vT808HFZizNep53hSIA2Jj8wl2pIBcVIcn5DnPJM2x9MexUQ9ux8Rq/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwzS49-oarKISVSwcqoqgZmBfSvrxSutxaDOcpY2p-HMePZ0bzf83lS3bdp8Z1b_-6V/exec';
 
         // --- GLOBAL SYSTEM STATUS CHECK ---
         async function checkBookingStatus() {
@@ -1393,11 +1393,11 @@
                 if (result && result.status === 'sukses') {
                     triggerSync();
                 } else {
-                    alert("Gagal menghapus data.");
+                    alert("Gagal menghapus data: " + (result.message || JSON.stringify(result)));
                     if(tr) tr.style.opacity = '1';
                 }
             } catch(e) {
-                alert("Terjadi kesalahan koneksi.");
+                alert("Terjadi kesalahan koneksi: " + e.message);
                 if(tr) tr.style.opacity = '1';
             }
         }
@@ -1434,10 +1434,10 @@
                     document.getElementById('inputBookingTitle').innerText = 'Input Manual Booking';
                     triggerSync();
                 } else {
-                    alert("Gagal menyimpan data.");
+                    alert("Gagal menyimpan data: " + (result.message || JSON.stringify(result)));
                 }
             } catch(e) {
-                alert("Terjadi kesalahan koneksi.");
+                alert("Terjadi kesalahan koneksi: " + e.message);
             }
             
             btn.innerHTML = 'Simpan';
