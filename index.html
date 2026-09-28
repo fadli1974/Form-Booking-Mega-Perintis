@@ -393,7 +393,7 @@
                             <input type="text" id="filterSearchBooking" onkeyup="applyFilters()" placeholder="Cari TRO / Perusahaan..." class="rounded-md border-gray-300 dark:border-slate-600 shadow-sm p-1.5 px-3 border bg-white dark:bg-slate-700 dark:text-white text-sm min-w-[150px]">
                         </div>
                         <div class="ml-auto flex items-center gap-2">
-                            <button onclick="openManualBookingModal()" class="px-4 py-1.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-md font-medium transition shadow-sm flex items-center gap-2">
+                            <button id="btnManualBooking" onclick="openManualBookingModal()" class="px-4 py-1.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-md font-medium transition shadow-sm flex items-center gap-2">
                                 <i class="fas fa-plus"></i> Input Manual
                             </button>
                             <button onclick="downloadBookingData()" class="px-4 py-1.5 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:hover:bg-emerald-900/50 rounded-md font-medium transition border border-emerald-200 dark:border-emerald-800 flex items-center gap-2">
@@ -2454,6 +2454,7 @@
             const navPemalang = document.getElementById('nav-pemalang');
             const navSetting = document.getElementById('nav-settingKedatangan');
             const navUser = document.getElementById('nav-user');
+            const btnManualBooking = document.getElementById('btnManualBooking');
             
             const loggedInProfile = document.getElementById('loggedInProfile');
             const loggedOutProfile = document.getElementById('loggedOutProfile');
@@ -2473,6 +2474,7 @@
                     if(navPemalang) navPemalang.style.display = '';
                     if(navSetting) navSetting.style.display = '';
                     if(navUser) navUser.style.display = '';
+                    if(btnManualBooking) btnManualBooking.style.display = '';
                 } else if (user.role === 'MP') {
                     // MP Can see Dasbord, Booking vs aktual, Update TRO (and Form Booking assumed)
                     if(navActual) navActual.style.display = 'none';
@@ -2480,6 +2482,15 @@
                     if(navPemalang) navPemalang.style.display = '';
                     if(navSetting) navSetting.style.display = 'none';
                     if(navUser) navUser.style.display = 'none';
+                    if(btnManualBooking) btnManualBooking.style.display = '';
+                } else {
+                    // Logged in but not LJR or MP
+                    if(navActual) navActual.style.display = 'none';
+                    if(navTro) navTro.style.display = 'none';
+                    if(navPemalang) navPemalang.style.display = 'none';
+                    if(navSetting) navSetting.style.display = 'none';
+                    if(navUser) navUser.style.display = 'none';
+                    if(btnManualBooking) btnManualBooking.style.display = 'none';
                 }
             } else {
                 // UMUM Can see Dashboard, Form Booking, Booking vs Actual
@@ -2491,6 +2502,7 @@
                 if(navPemalang) navPemalang.style.display = 'none';
                 if(navSetting) navSetting.style.display = 'none';
                 if(navUser) navUser.style.display = 'none';
+                if(btnManualBooking) btnManualBooking.style.display = 'none';
                 
                 // If they are on a hidden page, redirect to dashboard
                 const currentContainer = document.querySelector('main > div:not(.hidden)');
