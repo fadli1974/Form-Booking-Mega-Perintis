@@ -1608,7 +1608,13 @@
                     aksiHtml += row.aksi;
                 }
                 
-                if (currentUser && (currentUser.role === 'LJR' || currentUser.role === 'MP')) {
+                let userRole = '';
+                const userStr = localStorage.getItem('appUser');
+                if (userStr) {
+                    try { userRole = JSON.parse(userStr).role; } catch(e) {}
+                }
+                
+                if (userRole === 'LJR' || userRole === 'MP') {
                     aksiHtml += `<button onclick="editBookingModal(${row.rowIndex})" class="text-blue-500 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 p-1.5 rounded ml-1" title="Edit"><i class="fas fa-edit"></i></button>
                                  <button onclick="deleteBookingData(${row.rowIndex})" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-1.5 rounded" title="Hapus"><i class="fas fa-trash"></i></button>`;
                 }
