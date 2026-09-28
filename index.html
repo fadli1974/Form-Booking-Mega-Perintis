@@ -388,7 +388,14 @@
                                 <option value="">Semua Brand</option>
                             </select>
                         </div>
+                        <div class="flex items-center gap-2">
+                            <label class="font-semibold text-slate-700 dark:text-slate-300">Pencarian:</label>
+                            <input type="text" id="filterSearchBooking" onkeyup="applyFilters()" placeholder="Cari TRO / Perusahaan..." class="rounded-md border-gray-300 dark:border-slate-600 shadow-sm p-1.5 px-3 border bg-white dark:bg-slate-700 dark:text-white text-sm min-w-[150px]">
+                        </div>
                         <div class="ml-auto flex items-center gap-2">
+                            <button onclick="openManualBookingModal()" class="px-4 py-1.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-md font-medium transition shadow-sm flex items-center gap-2">
+                                <i class="fas fa-plus"></i> Input Manual
+                            </button>
                             <button onclick="downloadBookingData()" class="px-4 py-1.5 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:hover:bg-emerald-900/50 rounded-md font-medium transition border border-emerald-200 dark:border-emerald-800 flex items-center gap-2">
                                 <i class="fas fa-file-excel"></i> Download
                             </button>
@@ -873,6 +880,60 @@
         </div>
     </div>
 
+    <!-- Input Manual Booking Modal -->
+    <div id="inputBookingModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 overflow-y-auto py-10">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-xl max-w-lg w-full mx-4 my-auto">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 border-b border-gray-200 dark:border-slate-700 pb-2" id="inputBookingTitle">Input Manual Booking</h3>
+            <form id="formManualBooking" onsubmit="event.preventDefault(); submitManualBooking();" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-1">Tanggal Kedatangan</label>
+                        <input type="date" id="bookingTgl" required class="w-full rounded-md border border-gray-300 dark:border-slate-600 p-2 bg-white dark:bg-slate-700 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-1">Nama Perusahaan</label>
+                        <input type="text" id="bookingPerusahaan" required class="w-full rounded-md border border-gray-300 dark:border-slate-600 p-2 bg-white dark:bg-slate-700 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-1">Brands</label>
+                        <input type="text" id="bookingBrands" required class="w-full rounded-md border border-gray-300 dark:border-slate-600 p-2 bg-white dark:bg-slate-700 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-1">Style</label>
+                        <input type="text" id="bookingStyle" required class="w-full rounded-md border border-gray-300 dark:border-slate-600 p-2 bg-white dark:bg-slate-700 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-1">No Shipment</label>
+                        <input type="text" id="bookingShipment" required class="w-full rounded-md border border-gray-300 dark:border-slate-600 p-2 bg-white dark:bg-slate-700 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-1">Toko</label>
+                        <input type="number" id="bookingToko" required class="w-full rounded-md border border-gray-300 dark:border-slate-600 p-2 bg-white dark:bg-slate-700 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-1">Blister</label>
+                        <input type="number" id="bookingBlister" required class="w-full rounded-md border border-gray-300 dark:border-slate-600 p-2 bg-white dark:bg-slate-700 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-1">Qty</label>
+                        <input type="number" id="bookingQty" required class="w-full rounded-md border border-gray-300 dark:border-slate-600 p-2 bg-white dark:bg-slate-700 dark:text-white">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-1">Tujuan Pengiriman</label>
+                    <select id="bookingTujuan" required class="w-full rounded-md border border-gray-300 dark:border-slate-600 p-2 bg-white dark:bg-slate-700 dark:text-white">
+                        <option value="LJR Jakarta">LJR Jakarta</option>
+                        <option value="LJR Semarang">LJR Semarang</option>
+                    </select>
+                </div>
+                <div class="pt-4 flex justify-end gap-3 border-t border-gray-200 dark:border-slate-700">
+                    <button type="button" onclick="document.getElementById('inputBookingModal').classList.add('hidden')" class="px-5 py-2 rounded-md font-bold text-slate-600 bg-gray-200 hover:bg-gray-300 transition">Batal</button>
+                    <button type="submit" id="btnSubmitManualBooking" class="px-5 py-2 rounded-md font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Add User Modal -->
     <div id="addUserModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50">
         <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-xl max-w-md w-full mx-4">
@@ -1296,6 +1357,100 @@
         // Fetch Data Logic
         let allBookingData = [];
 
+        let currentEditBookingRow = null;
+
+        function editBookingModal(rowIndex) {
+            const row = allBookingData.find(r => r.rowIndex === rowIndex);
+            if (!row) return;
+            currentEditBookingRow = rowIndex;
+            document.getElementById('inputBookingTitle').innerText = 'Edit Data Booking';
+            
+            document.getElementById('bookingTgl').value = row.tanggalKedatangan ? row.tanggalKedatangan.split('T')[0] : '';
+            document.getElementById('bookingPerusahaan').value = row.namaPerusahaan || '';
+            document.getElementById('bookingBrands').value = row.brands || '';
+            document.getElementById('bookingStyle').value = row.style || '';
+            document.getElementById('bookingShipment').value = row.noShipment || '';
+            document.getElementById('bookingToko').value = row.jumlahToko || '';
+            document.getElementById('bookingBlister').value = row.jumlahBlister || '';
+            document.getElementById('bookingQty').value = row.jumlahQty || '';
+            document.getElementById('bookingTujuan').value = row.tujuanPengiriman || 'LJR Jakarta';
+            
+            document.getElementById('inputBookingModal').classList.remove('hidden');
+        }
+
+        async function deleteBookingData(rowIndex) {
+            if (!confirm("Apakah Anda yakin ingin menghapus data Booking ini secara permanen?")) return;
+            
+            const tr = document.querySelector(`#dataTableBody tr:nth-child(${allBookingData.findIndex(r => r.rowIndex === rowIndex) + 1})`);
+            if(tr) tr.style.opacity = '0.5';
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'delete_booking', rowIndex: rowIndex })
+                });
+                const result = await response.json();
+                if (result && result.status === 'sukses') {
+                    triggerSync();
+                } else {
+                    alert("Gagal menghapus data.");
+                    if(tr) tr.style.opacity = '1';
+                }
+            } catch(e) {
+                alert("Terjadi kesalahan koneksi.");
+                if(tr) tr.style.opacity = '1';
+            }
+        }
+
+        async function submitManualBooking() {
+            const btn = document.getElementById('btnSubmitManualBooking');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
+            btn.disabled = true;
+            
+            const payload = {
+                action: currentEditBookingRow ? "edit_booking" : "input_manual_booking",
+                rowIndex: currentEditBookingRow,
+                tanggalKedatangan: document.getElementById('bookingTgl').value,
+                namaPerusahaan: document.getElementById('bookingPerusahaan').value,
+                brands: document.getElementById('bookingBrands').value,
+                style: document.getElementById('bookingStyle').value,
+                noShipment: document.getElementById('bookingShipment').value,
+                jumlahToko: document.getElementById('bookingToko').value,
+                jumlahBlister: document.getElementById('bookingBlister').value,
+                jumlahQty: document.getElementById('bookingQty').value,
+                tujuanPengiriman: document.getElementById('bookingTujuan').value
+            };
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                if (result && result.status === 'sukses') {
+                    document.getElementById('inputBookingModal').classList.add('hidden');
+                    document.getElementById('formManualBooking').reset();
+                    currentEditBookingRow = null;
+                    document.getElementById('inputBookingTitle').innerText = 'Input Manual Booking';
+                    triggerSync();
+                } else {
+                    alert("Gagal menyimpan data.");
+                }
+            } catch(e) {
+                alert("Terjadi kesalahan koneksi.");
+            }
+            
+            btn.innerHTML = 'Simpan';
+            btn.disabled = false;
+        }
+
+        function openManualBookingModal() {
+            currentEditBookingRow = null;
+            document.getElementById('formManualBooking').reset();
+            document.getElementById('inputBookingTitle').innerText = 'Input Manual Booking';
+            document.getElementById('inputBookingModal').classList.remove('hidden');
+        }
+
         async function loadBookingData() {
             if (GOOGLE_SCRIPT_URL === 'URL_WEB_APP_DISINI') {
                 alert("Masukkan URL Web App Google Script Anda terlebih dahulu di kode baris 330.");
@@ -1354,6 +1509,7 @@
             const startDateStr = document.getElementById('filterStartDate').value;
             const endDateStr = document.getElementById('filterEndDate').value;
             const brandVal = document.getElementById('filterBrand').value;
+            const searchVal = (document.getElementById('filterSearchBooking')?.value || '').toLowerCase();
             
             let filteredData = [...allBookingData];
             
@@ -1380,8 +1536,24 @@
             if (brandVal) {
                 filteredData = filteredData.filter(row => row.brands === brandVal);
             }
+
+            // Filter by Search (TRO or Perusahaan)
+            if (searchVal) {
+                filteredData = filteredData.filter(row => {
+                    return (row.tro && row.tro.toLowerCase().includes(searchVal)) || 
+                           (row.namaPerusahaan && row.namaPerusahaan.toLowerCase().includes(searchVal));
+                });
+            }
             
             renderTable(filteredData);
+        }
+
+        function resetFilters() {
+            document.getElementById('filterStartDate').value = '';
+            document.getElementById('filterEndDate').value = '';
+            document.getElementById('filterBrand').value = '';
+            if(document.getElementById('filterSearchBooking')) document.getElementById('filterSearchBooking').value = '';
+            applyFilters();
         }
 
         function formatDateToDDMMYYYY(dateString) {
@@ -1429,12 +1601,18 @@
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors';
                 
-                let aksiHtml = '-';
+                let aksiHtml = `<div class="flex items-center justify-center gap-1">`;
                 if (row.actualKedatangan && String(row.actualKedatangan).trim() !== '') {
-                    aksiHtml = '<span class="px-3 py-1.5 bg-yellow-400 text-yellow-900 rounded-md text-xs font-bold shadow-sm inline-block">Received</span>';
+                    aksiHtml += '<span class="px-3 py-1.5 bg-yellow-400 text-yellow-900 rounded-md text-xs font-bold shadow-sm inline-block">Received</span>';
                 } else if (row.aksi) {
-                    aksiHtml = row.aksi;
+                    aksiHtml += row.aksi;
                 }
+                
+                if (currentUser && (currentUser.role === 'LJR' || currentUser.role === 'MP')) {
+                    aksiHtml += `<button onclick="editBookingModal(${row.rowIndex})" class="text-blue-500 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 p-1.5 rounded ml-1" title="Edit"><i class="fas fa-edit"></i></button>
+                                 <button onclick="deleteBookingData(${row.rowIndex})" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-1.5 rounded" title="Hapus"><i class="fas fa-trash"></i></button>`;
+                }
+                aksiHtml += `</div>`;
                 
                 tr.innerHTML = `
                     <td class="px-4 py-3 text-center font-semibold text-slate-800 dark:text-gray-200">${row.tro || '-'}</td>
@@ -1456,13 +1634,6 @@
                 `;
                 tbody.appendChild(tr);
             });
-        }
-        
-        function resetFilters() {
-            document.getElementById('filterStartDate').value = '';
-            document.getElementById('filterEndDate').value = '';
-            document.getElementById('filterBrand').value = '';
-            applyFilters();
         }
 
         function downloadBookingData() {

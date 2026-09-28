@@ -321,6 +321,42 @@ function doPost(e) {
         sheet.deleteRow(actualRow);
         return ContentService.createTextOutput(JSON.stringify({ "status": "sukses" })).setMimeType(ContentService.MimeType.JSON);
       }
+    } else if (data.action === "edit_booking") {
+      var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Data Booking");
+      if (sheet) {
+        var actualRow = parseInt(data.rowIndex);
+        // We only update the basic text fields, leave files alone, or just overwrite text fields.
+        // D: Tgl, E: Email, F: Perusahaan, G: Brands, H: Style, I: Shipment, J: Tlp, K: Toko, L: Blister, M: Qty, N: Tujuan
+        sheet.getRange(actualRow, 4).setValue(data.tanggalKedatangan || "");
+        sheet.getRange(actualRow, 6).setValue(data.namaPerusahaan || "");
+        sheet.getRange(actualRow, 7).setValue(data.brands || "");
+        sheet.getRange(actualRow, 8).setValue(data.style || "");
+        sheet.getRange(actualRow, 9).setValue(data.noShipment || "");
+        sheet.getRange(actualRow, 11).setValue(data.jumlahToko || "");
+        sheet.getRange(actualRow, 12).setValue(data.jumlahBlister || "");
+        sheet.getRange(actualRow, 13).setValue(data.jumlahQty || "");
+        sheet.getRange(actualRow, 14).setValue(data.tujuanPengiriman || "");
+        return ContentService.createTextOutput(JSON.stringify({ "status": "sukses" })).setMimeType(ContentService.MimeType.JSON);
+      }
+    } else if (data.action === "delete_booking") {
+      var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Data Booking");
+      if (sheet) {
+        var actualRow = parseInt(data.rowIndex);
+        sheet.deleteRow(actualRow);
+        return ContentService.createTextOutput(JSON.stringify({ "status": "sukses" })).setMimeType(ContentService.MimeType.JSON);
+      }
+    } else if (data.action === "input_manual_booking") {
+      var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Data Booking");
+      if (sheet) {
+        var timestamp = Utilities.formatDate(new Date(), "GMT+7", "dd/MM/yyyy HH:mm:ss");
+        var rowData = [
+          "", "", timestamp, data.tanggalKedatangan || "", "", data.namaPerusahaan || "", 
+          data.brands || "", data.style || "", data.noShipment || "", "", data.jumlahToko || "", 
+          data.jumlahBlister || "", data.jumlahQty || "", data.tujuanPengiriman || "", "", "", ""
+        ];
+        sheet.appendRow(rowData);
+        return ContentService.createTextOutput(JSON.stringify({ "status": "sukses" })).setMimeType(ContentService.MimeType.JSON);
+      }
     }
     
     // Siapkan folder untuk menampung file upload di Google Drive (buat otomatis jika belum ada)
