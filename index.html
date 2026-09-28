@@ -1476,7 +1476,7 @@
                 }
             } catch (error) {
                 console.error(error);
-                tbody.innerHTML = '<tr><td colspan="12" class="text-center py-12 text-red-500">Gagal menghubungi server. Pastikan URL Web App benar.</td></tr>';
+                tbody.innerHTML = `<tr><td colspan="12" class="text-center py-12 text-red-500">Gagal menghubungi server. Error: ${error.message} <br> <span class="text-xs text-gray-400">${error.stack}</span></td></tr>`;
             } finally {
                 icon.classList.remove('fa-spin');
             }
@@ -1702,7 +1702,7 @@
                 }
             } catch (error) {
                 console.error(error);
-                tbody.innerHTML = '<tr><td colspan="10" class="text-center py-12 text-red-500">Gagal menghubungi server. Pastikan URL Web App benar.</td></tr>';
+                tbody.innerHTML = `<tr><td colspan="10" class="text-center py-12 text-red-500">Gagal menghubungi server. Error: ${error.message} <br> <span class="text-xs text-gray-400">${error.stack}</span></td></tr>`;
             } finally {
                 icon.classList.remove('fa-spin');
             }
@@ -1873,7 +1873,7 @@
                 }
             } catch (error) {
                 console.error(error);
-                tbody.innerHTML = '<tr><td colspan="10" class="text-center py-12 text-red-500">Gagal menghubungi server. Pastikan URL Web App benar.</td></tr>';
+                tbody.innerHTML = `<tr><td colspan="10" class="text-center py-12 text-red-500">Gagal menghubungi server. Error: ${error.message} <br> <span class="text-xs text-gray-400">${error.stack}</span></td></tr>`;
             } finally {
                 icon.classList.remove('fa-spin');
             }
